@@ -7,4 +7,4 @@ class ServicesConfig(AppConfig):
     verbose_name = 'Услуги'
 
     def ready(self):
-        autodiscover_modules('auditlog', 'signals')
+        autodiscover_modules('signals')

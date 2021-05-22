@@ -55,6 +55,8 @@ def calculate_accounting_by_dates(obj, operation):
 def calculate_accounting():
     tariffs, _ = Accounting.objects.get_or_create(operation=OPERATIONS.TARIFF_CONNECTED.value)
     tvs, _ = Accounting.objects.get_or_create(operation=OPERATIONS.TV_CONNECTED.value)
+    gadgets, _ = Accounting.objects.get_or_create(operation=OPERATIONS.GADGET_SOLD.value)
 
     calculate_accounting_by_dates(tariffs, OPERATIONS.TARIFF_CONNECTED.value)
     calculate_accounting_by_dates(tvs, OPERATIONS.TV_CONNECTED.value)
+    calculate_accounting_by_dates(gadgets, OPERATIONS.GADGET_SOLD.value)

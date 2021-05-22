@@ -11,6 +11,7 @@ class AutoName(Enum):
 class AccountingOperation(AutoName):
     TV_CONNECTED = 'Подключено телевидение'
     TARIFF_CONNECTED = 'Подключен тариф'
+    GADGET_SOLD = 'Продан гаджет'
 
 
 class Gadget(AutoName):
