@@ -20,7 +20,8 @@ class FilialGadget(models.Model):
     amount = models.IntegerField()
     filial = models.ForeignKey(Filial, on_delete=models.PROTECT)
     gadget = models.ForeignKey('gadgets.Gadget', on_delete=models.PROTECT)
-    price = models.DecimalField(max_digits=9, decimal_places=2)
+    stock_price = models.DecimalField(max_digits=9, decimal_places=2)
+    sale_price = models.DecimalField(max_digits=9, decimal_places=2)
     available = models.BooleanField(default=True)
 
     class Meta:
@@ -33,6 +34,7 @@ class FilialGadget(models.Model):
 class SoldGadget(models.Model):
     amount = models.IntegerField('Amounts')
     gadget = models.ForeignKey(FilialGadget, on_delete=models.PROTECT)
+    profit = models.DecimalField(max_digits=9, decimal_places=2)
     date = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -42,8 +44,10 @@ class SoldGadget(models.Model):
         return f'Sold gadget: {self.gadget}. Date: {self.date}'
 
     def save(self, *args, **kwargs):
-        if self.gadget.amount >= self.amount:
-            self.gadget.amount -= self.amount
+        gadget = self.gadget
+        if gadget.amount >= self.amount:
+            gadget.amount -= self.amount
+            self.profit = self.amount * (gadget.sale_price - gadget.stock_price)
             self.gadget.save(update_fields=['amount'])
         else:
             raise Exception('Filial does not have enough gadgets')

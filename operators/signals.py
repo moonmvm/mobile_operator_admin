@@ -12,7 +12,7 @@ from utils.constants import AccountingOperation as Operation
 def add_sold_gadget_to_acccounting(sender, created, instance, **kwargs):
     if created:
         AccountingOperation.objects.create(
-            price=instance.amount * instance.gadget.price,
+            price=instance.profit,
             operation=Operation.GADGET_SOLD.value,
             gadget=instance,
         )

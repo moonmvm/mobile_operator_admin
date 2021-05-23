@@ -9,14 +9,15 @@ class FilialAdmin(admin.ModelAdmin):
 
 
 class FilialGadgetAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'filial', 'gadget', 'amount', 'price', 'available')
+    list_display = ('pk', 'filial', 'gadget', 'amount', 'stock_price', 'sale_price', 'available')
     search_fields = ('filial__name', 'gadget__name')
 
 
 class SoldGadgetAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'amount', 'gadget', 'date')
-    search_fields = ('pk', 'date')
+    list_display = ('pk', 'amount', 'gadget', 'profit', 'date')
     list_filter = ('gadget__gadget__name',)
+    readonly_fields = ('profit',)
+    search_fields = ('pk', 'date')
 
 
 admin.site.register(models.Filial, FilialAdmin)
