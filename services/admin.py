@@ -4,6 +4,7 @@ from . import models
 
 
 class ConnectedTariffAdmin(admin.ModelAdmin):
+    change_list_template = 'connected_tariff_changelist.html'
     list_display = ('pk', 'filial', 'tariff', 'client')
     search_fields = ('filial__name', 'tariff__name', 'client__first_name')
 
