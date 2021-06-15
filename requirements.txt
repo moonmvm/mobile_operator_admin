@@ -1,0 +1,4 @@
+Django==2.2.7
+django-admin-charts==0.24.1
+flake8==3.9.2
+Jinja2==3.0.1
